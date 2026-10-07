@@ -326,7 +326,7 @@ function fetchJSON(url,timeout){
   });
 }
 function loadStatsJson(){
-  return fetchJSON("stats.json",8000).then(function(t){
+  return fetchJSON("stats.json?_t=" + Date.now(),8000).then(function(t){
     var j=JSON.parse(t);
     state.records=(j&&j.records)||[];
     state.src="stats.json 同步";
