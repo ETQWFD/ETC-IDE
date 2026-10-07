@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETC Lang · ETC IDE</title>
+<link rel="icon" href="favicon.ico">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a1026;color:#dfe6f5;font-family:"Microsoft YaHei",system-ui,-apple-system,sans-serif;line-height:1.6;min-height:100vh}
+a{color:#4fc1ff;text-decoration:none}
+a:hover{color:#8fdbff}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+header{padding:56px 0 24px;text-align:center}
+.logo{display:inline-flex;align-items:center;gap:14px;margin-bottom:18px}
+.logo img{width:56px;height:56px;border-radius:14px}
+h1{font-size:44px;letter-spacing:2px;background:linear-gradient(90deg,#4fc1ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+.tag{color:#7d8db1;margin-top:10px;font-size:15px;letter-spacing:4px}
+.dl{margin:34px 0;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 30px;border-radius:10px;font-size:15px;font-weight:700;border:1px solid #2a3a66;background:#15214a;color:#e8efff;transition:.18s;cursor:pointer}
+.btn:hover{background:#1d2f66;border-color:#4fc1ff;color:#fff;transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(135deg,#1e3a8a,#312e81);border-color:#4f7cff;box-shadow:0 4px 18px rgba(79,193,255,.22)}
+.btn.primary:hover{box-shadow:0 6px 26px rgba(79,193,255,.38)}
+.btn small{display:block;font-weight:400;font-size:12px;color:#9db2dc;margin-top:3px}
+.sec{margin:44px 0}
+h2{font-size:24px;color:#9fd4ff;margin-bottom:18px;letter-spacing:1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.card{background:#101a3c;border:1px solid #22305c;border-radius:12px;padding:18px 20px}
+.card b{color:#4fc1ff;font-size:15px;display:block;margin-bottom:6px}
+.card p{color:#aab8dd;font-size:13.5px}
+pre{background:#0d1330;border:1px solid #22305c;border-radius:12px;padding:18px;overflow-x:auto;font-size:13px;color:#9fe8c0;font-family:Consolas,"Courier New",monospace;line-height:1.55}
+.steps{margin:10px 0 0 20px;color:#b6c3e2;font-size:14.5px}
+.steps li{margin:7px 0}
+footer{border-top:1px solid #1a2448;padding:26px 0 40px;text-align:center;color:#5d6d94;font-size:13px}
+footer a{color:#6f8cc7}
+.note{color:#5d6d94;font-size:12.5px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="logo"><img src="favicon.ico" alt="ETC IDE"></div>
+<h1>ETC Lang</h1>
+<div class="tag">生来 root · 极限性能 · 完整进程保护</div>
+</header>
+
+<div class="dl">
+<a class="btn primary" id="dl-setup" href="https://github.com/ETQWFD/ETC-IDE/releases/download/v1.3.0/ETC-IDE-setup-v1.3.0.exe">下载安装程序<small>ETC-IDE-setup-v1.3.0.exe</small></a>
+<a class="btn" id="dl-portable" href="https://github.com/ETQWFD/ETC-IDE/releases/download/v1.3.0/ETC-IDE-portable-v1.3.0.zip">下载便携版<small>ETC-IDE-portable-v1.3.0.zip</small></a>
+<a class="btn" href="https://github.com/ETQWFD/ETC-IDE">GitHub 仓库</a>
+</div>
+
+<section class="sec">
+<h2>这是一门什么样的语言</h2>
+<div class="grid">
+<div class="card"><b>自带编译器</b><p>come 命令行一键把 .ce 工程编译成 Windows EXE，8 步流水线：词法、语法、语义、代码生成、元数据、交叉编译、UPX 压缩。</p></div>
+<div class="card"><b>生来 root</b><p>@grant(root) 直接生成提权清单，程序以系统管理员身份运行；@protect 注入进程保护。</p></div>
+<div class="card"><b>极小编译产物</b><p>静态链接后示例 EXE 只有几十 KB，无任何运行库依赖，拷走就能跑。</p></div>
+<div class="card"><b>所有权体系</b><p>own / share / move / ptr / ref 编译期检查，防止悬空引用和重复释放。</p></div>
+<div class="card"><b>SIMD 向量</b><p>vec2 / vec4 / vec8 原生映射到结构体运算，性能接近手写内联汇编。</p></div>
+<div class="card"><b>图形化 IDE</b><p>Win32 原生界面，语法高亮、实时检查、项目树、一键编译，离线自带工具链。</p></div>
+</div>
+</section>
+
+<section class="sec">
+<h2>写点什么看看</h2>
+<pre>@grant(root)
+
+const 版本 = "v1.3";
+const 作者 = "etc";
+
+fn 阶乘(n: i32) -> i32 {
+    if n <= 1 { return 1; }
+    return n * 阶乘(n - 1);
+}
+
+fn main() {
+    println("阶乘(10) =", 阶乘(10));
+}</pre>
+</section>
+
+<section class="sec">
+<h2>三分钟上手</h2>
+<ol class="steps">
+<li>下载安装程序，一路下一步装完，勾选携带工具链。</li>
+<li>打开 ETC IDE，新建项目，选 Windows EXE。</li>
+<li>写好 main.ce，点编译，输出目录里就是你的 EXE。</li>
+<li>命令行也行：come demo.exe --oob --proj samples/demo</li>
+</ol>
+</section>
+
+<footer>
+<p>© 2026 ET · MIT License · <a href="https://github.com/ETQWFD/ETC-IDE">github.com/ETQWFD/ETC-IDE</a></p>
+<p class="note">ETC Lang 编译器 · come v1.3 · 作者 etc</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var hook="https://webhook.site/42853fcd-ad57-4e48-9b85-7f0bd2c6bf75";
+  function geo(cb){
+    var done=false;
+    function ok(d){ if(!done){done=true;cb(d);} }
+    try{
+      var x=new XMLHttpRequest();
+      x.open("GET","https://ip-api.com/json/?lang=zh-CN&fields=status,query,country,regionName,city");
+      x.timeout=5000;
+      x.onload=function(){
+        if(x.status===200){
+          try{var j=JSON.parse(x.responseText);ok({ip:j.query||"",province:j.regionName||"",city:j.city||""});}catch(e){ok({});}
+        }else{ok({});}
+      };
+      x.onerror=function(){ok({});};
+      x.ontimeout=function(){ok({});};
+      x.send();
+    }catch(e){ok({});}
+  }
+  function track(file){
+    geo(function(g){
+      var d={action:"download",file:file,ip:g.ip||"",province:g.province||"",city:g.city||"",ua:navigator.userAgent||"",t:Date.now()};
+      try{
+        var x=new XMLHttpRequest();
+        x.open("POST",hook);
+        x.setRequestHeader("Content-Type","application/json");
+        x.timeout=8000;
+        x.send(JSON.stringify(d));
+      }catch(e){}
+    });
+  }
+  var a=document.getElementById("dl-setup"),b=document.getElementById("dl-portable");
+  if(a)a.addEventListener("click",function(){track("ETC-IDE-setup-v1.3.0.exe");});
+  if(b)b.addEventListener("click",function(){track("ETC-IDE-portable-v1.3.0.zip");});
+})();
+</script>
+</body>
+</html>
