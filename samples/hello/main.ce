@@ -1,0 +1,17 @@
+// ============================================================
+//  ETC Lang 第一个程序 —— Hello World
+//  程序天生 root：@grant(root) 编译出的 EXE 自动请求管理员权限
+//  @protect 自动注入进程保护
+// ============================================================
+@grant(root)
+@protect {
+    stack_canary: true
+    anti_debug: true
+    heartbeat: 1000ms
+}
+
+fn main() -> i32 {
+    println("Hello, ETC Lang!");
+    println("速度超越 C/C++，程序天生 root。");
+    return 0;
+}

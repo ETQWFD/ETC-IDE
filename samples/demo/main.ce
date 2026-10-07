@@ -1,0 +1,140 @@
+// ============================================================
+//  ETC Lang 特性演示（demo）
+//  变量/常量/函数/类/结构体/枚举/泛型/所有权/指针/SIMD/异常/trait
+// ============================================================
+@grant(root)
+
+const 版本 = "v1.3";
+const 作者 = "etc";
+
+// 泛型函数
+fn 最大值<T>(a: T, b: T) -> T {
+    if a > b {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+// 结构体
+struct 坐标 {
+    let x: f64;
+    let y: f64;
+}
+
+// 枚举
+enum 难度 {
+    简单 = 1,
+    标准,
+    极限
+}
+
+// 类
+class 玩家 {
+    let 名字: str;
+    let 等级: i32 = 1;
+
+    fn 升级(self) {
+        self.等级 = self.等级 + 1;
+    }
+
+    fn 描述(self) -> str {
+        return self.名字 + " Lv." + to_str(self.等级);
+    }
+}
+
+// trait + impl
+trait 面积 {
+    fn 计算(self) -> f64;
+}
+
+impl 面积 for 坐标 {
+    fn 计算(self) -> f64 {
+        return self.x * self.y;
+    }
+}
+
+fn 阶乘(n: i32) -> i32 {
+    if n <= 1 {
+        return 1;
+    }
+    return n * 阶乘(n - 1);
+}
+
+fn main() -> i32 {
+    println("── ETC Lang 特性演示 ──");
+    println("版本:", 版本, " 作者:", 作者);
+
+    // 变量与控制流
+    let sum = 0;
+    let i = 0;
+    while i < 10 {
+        sum = sum + i;
+        i = i + 1;
+    }
+    println("while: 0+...+9 =", sum);
+
+    // for 遍历
+    for x in [1, 2, 3, 4] {
+        println("for: x =", x);
+    }
+
+    // match 匹配
+    let 难度值 = 3;
+    match 难度值 {
+        1 => println("难度: 简单"),
+        2 => println("难度: 标准"),
+        _ => println("难度: 极限")
+    }
+
+    // 函数与泛型
+    println("阶乘(10) =", 阶乘(10));
+    println("最大值(3, 9) =", 最大值<i32>(3, 9));
+
+    // 类 + 所有权
+    let 主角: own<玩家> = new 玩家("ET");
+    主角.升级();
+    主角.升级();
+    println("主角:", 主角.描述());
+    let 继承者 = move(主角);
+    println("move 后:", 继承者.描述());
+
+    // 结构体 + trait 方法
+    let 房间: own<坐标> = new 坐标(3.0, 4.0);
+    println("面积 =", 房间.计算());
+
+    // 手动内存管理
+    let p: ptr<i32> = alloc<i32>(4);
+    store(p, 42);
+    println("load(p) =", load(p));
+    free(p);
+
+    // SIMD 向量（vec4<f32> → __m128 级别）
+    let v: vec4<f32> = etc_vec4f(1.0, 2.0, 3.0, 4.0);
+    let w: vec4<f32> = etc_vec4f(4.0, 3.0, 2.0, 1.0);
+    let s = v + w;
+    println("SIMD: v[0]+w[0] =", s[0]);
+
+    // 异常处理
+    try {
+        let x = 100;
+        if x > 50 {
+            throw "数字太大";
+        }
+    } catch (e: str) {
+        println("捕获异常:", e);
+    } finally {
+        println("清理完成");
+    }
+
+    // unsafe 块
+    unsafe {
+        let raw: ptr<i32> = alloc<i32>(1);
+        store(raw, 7);
+        println("unsafe raw =", load(raw));
+        free(raw);
+    }
+
+    println("── 演示结束 ──");
+    return 0;
+}

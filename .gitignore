@@ -1,0 +1,7 @@
+build/
+build-win/
+out/
+pkg/
+generated/
+*.o
+*.obj
