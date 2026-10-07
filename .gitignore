@@ -5,3 +5,4 @@ pkg/
 generated/
 *.o
 *.obj
+toolchain/

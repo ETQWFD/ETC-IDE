@@ -1,14 +1,38 @@
 {
- "updated": "2026-10-07 15:59:17",
- "downloads": 1,
+ "updated": "2026-10-07 16:19:21",
+ "downloads": 4,
  "records": [
+  {
+   "ip": "2409:8a55:9e62:6a50:d526:9794:8bbf:2372",
+   "province": "广东省",
+   "city": "Meizhou",
+   "file": "ETC-IDE-setup-v1.3.0.exe",
+   "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0",
+   "t": 1791361140117
+  },
+  {
+   "ip": "2409:8a55:9e62:6a50:d526:9794:8bbf:2372",
+   "province": "广东省",
+   "city": "Meizhou",
+   "file": "ETC-IDE-setup-v1.3.0.exe",
+   "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0",
+   "t": 1791361132295
+  },
+  {
+   "ip": "39.96.218.56",
+   "province": "北京市",
+   "city": "Beijing",
+   "file": "ETC-IDE-setup-v1.3.0.exe",
+   "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 DoubaoWorkVM",
+   "t": 1791361063130
+  },
   {
    "ip": "47.93.135.207",
    "province": "测试省",
    "city": "测试市",
    "file": "ETC-IDE-setup-v1.3.0.exe",
    "ua": "test",
-   "t": 1791359957447
+   "t": 1791361161157
   }
  ]
 }

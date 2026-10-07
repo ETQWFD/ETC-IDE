@@ -101,19 +101,30 @@ fn main() {
   function geo(cb){
     var done=false;
     function ok(d){ if(!done){done=true;cb(d);} }
-    try{
-      var x=new XMLHttpRequest();
-      x.open("GET","https://ip-api.com/json/?lang=zh-CN&fields=status,query,country,regionName,city");
-      x.timeout=5000;
-      x.onload=function(){
-        if(x.status===200){
-          try{var j=JSON.parse(x.responseText);ok({ip:j.query||"",province:j.regionName||"",city:j.city||""});}catch(e){ok({});}
-        }else{ok({});}
-      };
-      x.onerror=function(){ok({});};
-      x.ontimeout=function(){ok({});};
-      x.send();
-    }catch(e){ok({});}
+    function get(url,map){
+      return new Promise(function(res){
+        var x=new XMLHttpRequest();
+        x.open("GET",url);
+        x.timeout=4000;
+        x.onload=function(){
+          if(x.status===200){try{res(map(JSON.parse(x.responseText)));}catch(e){res(null);}}
+          else res(null);
+        };
+        x.onerror=function(){res(null);};
+        x.ontimeout=function(){res(null);};
+        x.send();
+      });
+    }
+    get("https://ip-api.com/json/?lang=zh-CN&fields=status,query,country,regionName,city",function(j){
+      return (j&&j.status==="success")?{ip:j.query||"",province:j.regionName||"",city:j.city||""}:null;
+    }).then(function(r){
+      if(r){ok(r);return null;}
+      return get("https://ip.useragentinfo.com/json",function(j){
+        return {ip:j.ip||"",province:j.province||"",city:j.city||""};
+      });
+    }).then(function(r){
+      if(r)ok(r);else ok({});
+    });
   }
   function track(file){
     geo(function(g){
